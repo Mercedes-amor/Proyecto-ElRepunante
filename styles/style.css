@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  background-color: #dbaf7c;
+}
+
+#start-btn, #restart-btn, #nextLevel-btn {
+  background-color: rgb(172, 100, 22);
+  color: rgb(48, 26, 2);
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 40px;
+  border-radius: 10px; 
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
+#game-box {
+  background-color: #dbaf7c;
+  width:1000px;
+  height:700px;
+
+  background-image: url("../images/fondo.jpg");
+  background-position: center;
+  background-size: cover;
+
+
+
+  /* default settings for game box */
+  /* overflow: hidden;  this will prevent element from been visible outside the game box */
+  position: relative; /* this will allow elements to be positioned relative to the game-box */
+  user-select: none; /* this will prevent elements from being highlighted */
+
+}
+
+#game-screen, #gameover-screen, #gamecomplete-screen {
+  display: none;
+}
+
+
+
+
+
+
+
+
