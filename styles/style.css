@@ -38,6 +38,57 @@ body {
 
 }
 
+#score-box {
+
+width:1000px;
+height:100px;
+background-color: #221608;;
+border: 2px solid rgb(0, 0, 0);
+border-radius: 10px;
+position: relative;
+/* text-align: center; */
+}
+
+#score {
+width:250px;
+height:70px;
+font-size: 60px;
+color:beige;
+text-align: center;
+background-color: #57cb19;
+border: 2px solid rgb(255, 255, 255);
+border-radius: 10px;
+margin-top: 14px;
+margin-right: 14px;
+float: right;
+
+
+}
+
+#itemBonus {
+  width:70px;
+  height:70px;
+  background-color: #efefef;
+  /* background-image: url("../images/azucar.png"); */
+  background-position: center;
+  background-size:contain;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin-top: 14px;
+  margin-left: 14px;
+  float: left;
+  
+  }
+  #textoBonus {
+  width:250px;
+  height:70px;  
+  color:rgb(255, 255, 255);
+  font-size: 30px;
+  display: inline;
+  padding-top: 30px;
+
+    
+}
 #game-screen, #gameover-screen, #gamecomplete-screen {
   display: none;
 }

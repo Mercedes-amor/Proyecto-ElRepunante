@@ -5,14 +5,14 @@ class Cafe {
 
     //Creamos el elemento en el DOM
     this.cafeNode = document.createElement("img");
-    this.cafeNode.src = "./images/cafe2.png";
+    this.cafeNode.src = "./images/cafe3.png";
     gameBoxNode.append(this.cafeNode);
      
     //propiedades café
     this.x = 400; //posición eje x
-    this.y = 400; //posición eje y
-    this.w = 200; //ancho
-    this.h = 300; //alto
+    this.y = 570; //posición eje y
+    this.w = 130; //ancho
+    this.h = 90; //alto
 
 
     //tamaño y posición inicial café

@@ -1,14 +1,12 @@
-console.log("desde item")
+console.log("desde obstáculos")
 
-class Item {
-    constructor(posX,isBonus) {
+class Obstaculo {
+    constructor(posX) {
 
     //propiedades items: azucar, leche, sacarina, aguardiente
 
     this.node = document.createElement("img");
-    this.node.src = "./images/azucar.png";  
-    isBonus = isBonus
-
+    this.node.src = "./images/leche.png";    
     gameBoxNode.append(this.node)
 
 
@@ -29,9 +27,7 @@ class Item {
     }
 
 
-
-
-//Métodos items:
+//Métodos obstaculo:
 
 gravityEffect = () => {
     this.y += this.gravitySpeed;
@@ -43,12 +39,4 @@ positionUpdate = () => {
 this.node.style.top = `${this.y}px`;
 
   }
-
-imgUpdate = () => {
-  if(isBonus===true) {
-    this.node.src = "./images/azucar.png"
-  } else {
-    this.node.src = "./images/leche.png"
-  }
-}
 }
