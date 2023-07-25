@@ -45,4 +45,5 @@ if (this.y < 570) {
   this.positionUpdate();
 }
 }
+
 }

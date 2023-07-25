@@ -69,17 +69,17 @@ window.addEventListener("keydown", () => {
     // console.log("presionando una tecla",event.key);
 
    
-    if (event.key === " ") {
+    if (event.key === " " && gameObj.cafe.y > 0) {
         gameObj.cafe.y -= 100;
         gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
     }
 
-    if (event.key === "ArrowRight") {
+    if (event.key === "ArrowRight" && gameObj.cafe.x < 880 ) {
         gameObj.cafe.x += 40;
         gameObj.cafe.cafeNode.src = "./images/cafeDrch.png";
     }
 
-    if (event.key === "ArrowLeft") {
+    if (event.key === "ArrowLeft" && gameObj.cafe.x > 0) {
         gameObj.cafe.x -= 40;
         gameObj.cafe.cafeNode.src = "./images/cafeIzq.png";
     }
@@ -96,7 +96,7 @@ window.addEventListener("keydown", () => {
 
 //PLANIFICACIÓN
 
-//Propiedades
+//PROPIEDADES conseguidas:
 //1. el café: 
         //-dimensiones y posición: x, y, w, h CHECK
         //-movimiento: derecha e izq CHECK
@@ -110,30 +110,28 @@ window.addEventListener("keydown", () => {
     //-dimensiones y posición: x, y, w, h CHECK
 
 
-//Métodos
+//MÉTODOS conseguidos:
+// -Movimiento café: derecha/izq CHECK
+// -efecto gravedad CHECK
+// -randomizar items/obstáculos CHECK
+// -Crear clase café CHECK
+// -Crear clases para items CHECK
+// -Colisiones CHECK
+// -Game over CHECK
+// -Siguiente Nivel CHECK
+// -Puntuación- Nivel satisfaccción CHECK
 
-//Movimiento café: derecha/izq CHECK
-//efecto gravedad CHECK
-//randomizar items/obstáculos CHECK
-//Crear clase café CHECK
-//Crear clases para items CHECK
-//Colisiones CHECK
-//Game over CHECK
-//Siguiente Nivel CHECK
-//Puntuación- Nivel satisfaccción CHECK
 
+//BONUS conseguidos:
+// -Barra- salto café CHECK
+// -score con barra y no con números CHECK
+// -Cambiar imagen café drch/izq CHECK
+// -Reinicio juego CHECK
+// -Café no salga de los márgenes CHECK
 
-//Bonus
-
-//Barra- salto café CHECK
-//score con barra y no con números
-//Cambiar imagen café drch/izq CHECK
-//Conseguir volver a imagen inicial cafe
-//movimiento fluido café
-//randomizar item bonus
-//Solucionar problema congelación items, que no se superpongan
-//Reinicio juego CHECK
-//Sonido
-//Café no salga de los márgenes
-//iconos no se superpongan
-//Que el café no salga de los laterales
+//PENDIENTES:
+// -movimiento fluido café
+// -Sonido
+// -Conseguir volver a imagen inicial cafe
+// -¡¡objetos no se superpongan!! Mirar con comprobación colisiones
+// -¡¡Solucionar problema congelación items!! Mirar usar booleanos

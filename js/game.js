@@ -169,7 +169,7 @@ obstaculoColision = () => {
 itemsFalls = () => {
     //cuando queremos que aparezcan items
     // - Al inicio del juego
-    // - cuando hayan pasado 2 segundos. this.frames % 120 === 0 
+    // - cuando hayan pasado x segundos.
     let isBonus= true
     
     if (this.frames % 240 === 0) {
@@ -250,7 +250,7 @@ gameLoop = () => {
     this.obstaculoColision();
 
     if (this.isGameOn === true) {      
-        this.cafe.volverSalto()
+        this.cafe.volverSalto();
         }
 
    if (this.isGameOn === true) {      
