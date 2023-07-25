@@ -38,11 +38,11 @@ positionUpdate = () => {
   }
 
 
-// volverSalto = () => {
-// if (this.y < 570) {
-//   console.log("has dado un salto")
-//   this.y += 4;
-//   this.cafeNode.style.top = `${this.y}px`;
-// }
-// }
+volverSalto = () => {
+if (this.y < 570) {
+  console.log("has dado un salto")
+  this.y += 4;
+  this.positionUpdate();
+}
+}
 }

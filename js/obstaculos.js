@@ -1,4 +1,4 @@
-console.log("desde obstáculos")
+// console.log("desde obstáculos")
 
 class Obstaculo {
     constructor(posX,imgA,level) {

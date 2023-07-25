@@ -1,4 +1,4 @@
-console.log("console log desde main.js")
+// console.log("console log desde main.js")
 
 // * GLOBAL VARIABLES
 const startBtnNode = document.querySelector("#start-btn");
@@ -12,8 +12,14 @@ const gameCompleteScreenNode = document.querySelector("#gamecomplete-screen")
 const scoreNode = document.querySelector("#score");
 const itemBonusNode = document.querySelector("#itemBonus");
 
+const barraProgreso = document.querySelector("#barraProgreso");
+const cantidadProgreso = document.querySelector("#cantidad-progreso");
+
+
+
 let gameObj = null; //juego aún no ha iniciado
 let itemHits = 0;
+
 let level = 2
 
 
@@ -28,10 +34,10 @@ function startGame() {
     gameScreenNode.style.display = "flex";
     
     itemHits = 0
-    scoreNode.innerText = itemHits
+    barraProgreso.innerText = "0%"
     gameBoxNode.innerHTML = "";
     
-    gameObj = new Game(level);
+    gameObj = new Game(2);
     gameObj.gameLoop()
     }
 
@@ -40,7 +46,7 @@ function nextLevel() {
     gameCompleteScreenNode.style.display = "none";
     gameScreenNode.style.display = "flex";
     itemHits = 0
-    scoreNode.innerText = itemHits
+    barraProgreso.innerText = "0%"
         
     gameBoxNode.innerHTML = "";
 
@@ -60,12 +66,12 @@ restartBtnNode.addEventListener("click",startGame)
 
 window.addEventListener("keydown", () => {
 
-    console.log("presionando una tecla",event.key);
+    // console.log("presionando una tecla",event.key);
 
    
     if (event.key === " ") {
         gameObj.cafe.y -= 100;
-
+        gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
     }
 
     if (event.key === "ArrowRight") {
@@ -77,10 +83,7 @@ window.addEventListener("keydown", () => {
         gameObj.cafe.x -= 40;
         gameObj.cafe.cafeNode.src = "./images/cafeIzq.png";
     }
-
-
-
-    
+ 
     gameObj.cafe.positionUpdate();
     gameObj.cafe.volverSalto();
 
@@ -121,14 +124,16 @@ window.addEventListener("keydown", () => {
 
 
 //Bonus
-//Barra- acelerón café
+
+//Barra- salto café CHECK
 //score con barra y no con números
 //Cambiar imagen café drch/izq CHECK
-//Conseguir volver a posición inicial cafe
+//Conseguir volver a imagen inicial cafe
+//movimiento fluido café
 //randomizar item bonus
 //Solucionar problema congelación items, que no se superpongan
-//Diferentes velocidades items
 //Reinicio juego CHECK
 //Sonido
 //Café no salga de los márgenes
 //iconos no se superpongan
+//Que el café no salga de los laterales

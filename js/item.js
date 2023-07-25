@@ -1,4 +1,4 @@
-console.log("desde item")
+// console.log("desde item")
 
 class Item {
     constructor(posX,level) {

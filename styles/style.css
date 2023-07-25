@@ -3,14 +3,26 @@ body {
   background-color: #dbaf7c;
 }
 
-#start-btn, #restart-btn, #nextLevel-btn {
+#start-btn,
+#restart-btn {
   background-color: rgb(172, 100, 22);
   color: rgb(48, 26, 2);
   padding: 20px;
   font-size: 20px;
   margin-top: 40px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
+
+#nextLevel-btn {
+  background-color: rgb(111, 7, 70);
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+
 
 .container {
   display: flex;
@@ -22,81 +34,78 @@ body {
 
 #game-box {
   background-color: #dbaf7c;
-  width:1000px;
-  height:700px;
+  width: 1000px;
+  height: 700px;
 
   background-image: url("../images/fondo.jpg");
   background-position: center;
   background-size: cover;
 
-
-
   /* default settings for game box */
   /* overflow: hidden;  this will prevent element from been visible outside the game box */
   position: relative; /* this will allow elements to be positioned relative to the game-box */
   user-select: none; /* this will prevent elements from being highlighted */
-
 }
 
 #score-box {
-
-width:1000px;
-height:100px;
-background-color: #221608;;
-border: 2px solid rgb(0, 0, 0);
-border-radius: 10px;
-position: relative;
-/* text-align: center; */
+  width: 1000px;
+  height: 100px;
+  background-color: #221608;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  position: relative;
+  /* text-align: center; */
 }
 
 #score {
-width:250px;
-height:70px;
-font-size: 60px;
-color:beige;
-text-align: center;
-background-color: #57cb19;
-border: 2px solid rgb(255, 255, 255);
-border-radius: 10px;
-margin-top: 14px;
-margin-right: 14px;
-float: right;
+  width: 300px;
+  height: 95px;
+  font-size: 80px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  background-color: #ffffff;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin:0;
+  float: right;
+  position: relative;
+}
+
+#barraProgreso {
+  background-color: rgb(0, 248, 0);
+  height: 100%;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
 
 
+#textoBonus {
+  width: 250px;
+  height: 100px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  float: left;
+  margin: 0;
 }
 
 #itemBonus {
-  width:70px;
-  height:70px;
+  width: 95px;
+  height: 95px;
   background-color: #efefef;
   background-image: url("../images/azucar.png");
-  background-position: cover;
-  background-size:contain;
+  background-size: contain;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
-  margin-top: 14px;
-  margin-left: 14px;
-  float: left;
-  
-  }
-  #textoBonus {
-  width:250px;
-  height:70px;  
-  color:rgb(255, 255, 255);
-  font-size: 30px;
-  display: inline;
-  
-
-    
+  margin: 0;
+ display: inline-flex;
 }
-#game-screen, #gameover-screen, #gamecomplete-screen {
+
+
+#game-screen,
+#gameover-screen,
+#gamecomplete-screen {
+  
   display: none;
 }
-
-
-
-
-
-
-
-
