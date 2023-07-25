@@ -69,8 +69,8 @@ float: right;
   width:70px;
   height:70px;
   background-color: #efefef;
-  /* background-image: url("../images/azucar.png"); */
-  background-position: center;
+  background-image: url("../images/azucar.png");
+  background-position: cover;
   background-size:contain;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
@@ -85,7 +85,7 @@ float: right;
   color:rgb(255, 255, 255);
   font-size: 30px;
   display: inline;
-  padding-top: 30px;
+  
 
     
 }

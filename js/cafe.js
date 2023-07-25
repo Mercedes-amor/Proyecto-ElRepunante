@@ -5,7 +5,7 @@ class Cafe {
 
     //Creamos el elemento en el DOM
     this.cafeNode = document.createElement("img");
-    this.cafeNode.src = "./images/cafe3.png";
+    this.cafeNode.src = "./images/cafe.png";
     gameBoxNode.append(this.cafeNode);
      
     //propiedades café
@@ -25,9 +25,6 @@ class Cafe {
 
 //Métodos del café
 
-//Moverse derecha/izq
-
-
 
 //Acelerón
 
@@ -37,6 +34,15 @@ positionUpdate = () => {
     // Iría aquí todo lo que afectara al eje x u otros cambios afectara a la posición.
 
     this.cafeNode.style.left = `${this.x}px`;
-
+    this.cafeNode.style.top = `${this.y}px`;
   }
+
+
+// volverSalto = () => {
+// if (this.y < 570) {
+//   console.log("has dado un salto")
+//   this.y += 4;
+//   this.cafeNode.style.top = `${this.y}px`;
+// }
+// }
 }

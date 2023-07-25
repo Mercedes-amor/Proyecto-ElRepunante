@@ -13,7 +13,8 @@ const scoreNode = document.querySelector("#score");
 const itemBonusNode = document.querySelector("#itemBonus");
 
 let gameObj = null; //juego aún no ha iniciado
-let itemHits = 0
+let itemHits = 0;
+let level = 2
 
 
 // * STATE MANAGEMENT FUNCTIONS
@@ -26,9 +27,11 @@ function startGame() {
     gameCompleteScreenNode.style.display ="none";
     gameScreenNode.style.display = "flex";
     
+    itemHits = 0
+    scoreNode.innerText = itemHits
+    gameBoxNode.innerHTML = "";
     
-    
-    gameObj = new Game();
+    gameObj = new Game(level);
     gameObj.gameLoop()
     }
 
@@ -41,8 +44,10 @@ function nextLevel() {
         
     gameBoxNode.innerHTML = "";
 
-    gameObj = new Game();
+    gameObj = new Game(level+=2);
     gameObj.gameLoop()
+
+    
     }
 
 // * ADD EVENT LISTENERS
@@ -51,20 +56,33 @@ startBtnNode.addEventListener("click",startGame)
 
 nextLevelBtnNode.addEventListener("click",nextLevel)
 
-restartBtnNode.addEventListener("click",nextLevel)
+restartBtnNode.addEventListener("click",startGame)
 
 window.addEventListener("keydown", () => {
 
-    console.log("presionando una tecla");
+    console.log("presionando una tecla",event.key);
+
+   
+    if (event.key === " ") {
+        gameObj.cafe.y -= 100;
+
+    }
 
     if (event.key === "ArrowRight") {
-        gameObj.cafe.x += 40;}
+        gameObj.cafe.x += 40;
+        gameObj.cafe.cafeNode.src = "./images/cafeDrch.png";
+    }
 
     if (event.key === "ArrowLeft") {
         gameObj.cafe.x -= 40;
+        gameObj.cafe.cafeNode.src = "./images/cafeIzq.png";
     }
 
+
+
+    
     gameObj.cafe.positionUpdate();
+    gameObj.cafe.volverSalto();
 
 })
 
@@ -86,26 +104,31 @@ window.addEventListener("keydown", () => {
     //
 
 //3. obstáculos
-    //-dimensiones y posición: x, y, w, h
+    //-dimensiones y posición: x, y, w, h CHECK
 
 
-    //Métodos
+//Métodos
 
 //Movimiento café: derecha/izq CHECK
 //efecto gravedad CHECK
-//randomizar items/obstáculos
+//randomizar items/obstáculos CHECK
 //Crear clase café CHECK
 //Crear clases para items CHECK
-//Colisiones
-//Game over
-//Siguiente Nivel
-//Puntuación- Nivel satisfaccción
+//Colisiones CHECK
+//Game over CHECK
+//Siguiente Nivel CHECK
+//Puntuación- Nivel satisfaccción CHECK
 
 
 //Bonus
 //Barra- acelerón café
-//Cambiar imagen café drch/izq
+//score con barra y no con números
+//Cambiar imagen café drch/izq CHECK
+//Conseguir volver a posición inicial cafe
 //randomizar item bonus
+//Solucionar problema congelación items, que no se superpongan
 //Diferentes velocidades items
-//Reinicio juego
+//Reinicio juego CHECK
 //Sonido
+//Café no salga de los márgenes
+//iconos no se superpongan

@@ -3,7 +3,7 @@ console.log("desde game.js")
 //Clase Game
 
 class Game {
-    constructor() {
+    constructor(level) {
 
      //Agregamos el jugador/café   
      this.cafe = new Cafe()   
@@ -16,6 +16,7 @@ class Game {
     
     this.frames = 0   
     this.isGameOn = true;
+    this.level = level
 
     }
 
@@ -24,19 +25,33 @@ class Game {
 levelComplete =() => {
     this.isGameOn = false; // detiene la recursión del juego
     gameScreenNode.style.display ="none"; //oculta pantalla del juego
-    gameCompleteScreenNode.style.display = "flex"; //muestra pantalla nivel completado
+    gameCompleteScreenNode.style.display = "flex"; //muestra pantalla nivel completado   
+    gameOverScreenNode.style.display = "none"; //ocultar pantalla GameOver
 }
 gameOver = () => {
     this.isGameOn = false; // detiene la recursión del juego
     gameScreenNode.style.display ="none"; //oculta panta del juego
     gameOverScreenNode.style.display = "flex"; //mostrar pantalla final
+    gameCompleteScreenNode.style.display = "none"; //oculta pantalla del gameOver
+}
+changeItemIcon =() => {
+if (this.frames < 600) { 
+    itemBonusNode.style.backgroundImage = 'url("./images/azucar.png")';
+}
+if (this.frames === 600) { 
+    itemBonusNode.style.backgroundImage = 'url("./images/leche.png")';
+}
 }
 
 cogerItem = () => {
 //Si el café coge el Item sube puntuación
-
-this.itemsArr.forEach((eachItem) => {
+this.itemsArr.forEach((eachItem,i) => {
     //los items => eachItem
+   
+    if (this.frames > 600) { 
+    this.itemsArr[i].node.src = "./images/leche.png";
+    }
+    
     if (
         this.cafe.x < eachItem.x + eachItem.w &&
         this.cafe.x + this.cafe.w > eachItem.x &&
@@ -48,18 +63,14 @@ this.itemsArr.forEach((eachItem) => {
     itemHits++
     console.log(`estos son los itemHits azucar, ${itemHits}`)
 
+
     scoreNode.innerText = itemHits
     console.log("Has cogido un azucarillo!")  
     console.log(eachItem)
+  
     
-    this.itemsArr[this.itemsArr.indexOf(eachItem)].node.remove()
+    this.itemsArr[i].node.remove()
     this.itemsArr.shift() //quitar el elemento del array
-
-   
-    if (itemHits > 2) {
-        this.itemsArr[this.itemsArr.indexOf(eachItem)].node.src = "./images/leche.png"
-        
-    }
    
 
     if (itemHits === 5) {
@@ -72,8 +83,14 @@ this.itemsArr.forEach((eachItem) => {
 obstaculoColision = () => {
     //Si el café choca con un obstaculo baja puntuación
     
-    this.obstaculosArr.forEach((eachObstaculo) => {
+    this.obstaculosArr.forEach((eachObstaculo,i) => {
         //los items => eachObstaculo
+        if (this.frames > 600 && this.obstaculosArr[i].imgA === true) {
+        this.obstaculosArr[i].node.src = "./images/azucar.png"
+        }
+        
+
+
         if (
             this.cafe.x < eachObstaculo.x + eachObstaculo.w &&
             this.cafe.x + this.cafe.w > eachObstaculo.x &&
@@ -89,7 +106,7 @@ obstaculoColision = () => {
         console.log("Has cogido leche!")  
         console.log(eachObstaculo)
         
-        this.obstaculosArr[this.obstaculosArr.indexOf(eachObstaculo)].node.remove()
+        this.obstaculosArr[i].node.remove()
         this.obstaculosArr.shift() //quitar el elemento del array
     
         if (itemHits < 0) {
@@ -110,7 +127,7 @@ itemsFalls = () => {
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
 
-        let newItem = new Item(randomPositionX,isBonus);
+        let newItem = new Item(randomPositionX,this.level);
         this.itemsArr.push (newItem)
         console.log(this.itemsArr[0].y)
         console.log(this.itemsArr)
@@ -125,16 +142,22 @@ obstaculosFalls = () => {
     // - cuando hayan pasado 2 segundos. this.frames % 120 === 0 
 
     
-    if (this.frames % 100 === 0) {
-        let randomPositionX = Math.floor(Math.random() * 940); 
+    if (this.frames % 240 === 0) {
+        let randomPositionA = Math.floor(Math.random() * 940); 
+        let randomPositionB = Math.floor(Math.random() * 940); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
-        let newObstaculo = new Obstaculo(randomPositionX);
-        this.obstaculosArr.push (newObstaculo)
+        let newObstaculoA = new Obstaculo(randomPositionA, true,this.level);
+        this.obstaculosArr.push (newObstaculoA)
+    
+        let newObstaculoB = new Obstaculo(randomPositionB, false,this.level);
+        this.obstaculosArr.push (newObstaculoB)
+
         console.log(this.obstaculosArr[0].y)
         console.log(this.obstaculosArr)
     }
 }
+
 itemsDelete= () => {
     //si el primer item del array ha salido de la vista lo eliminamos
 
@@ -162,13 +185,16 @@ gameLoop = () => {
     this.frames++;
     // console.log(this.frames)
 
+    this.changeItemIcon();
+    this.cogerItem();
+
+
     this.itemsFalls();
     this.obstaculosFalls();
     this.itemsDelete();
 
-    this.cogerItem();
+
     this.obstaculoColision();
-    // this.changeItem();
 
    if (this.isGameOn === true) {      
     this.itemsArr.forEach((eachItem) => {

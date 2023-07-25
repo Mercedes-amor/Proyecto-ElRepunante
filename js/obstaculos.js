@@ -1,22 +1,28 @@
 console.log("desde obstáculos")
 
 class Obstaculo {
-    constructor(posX) {
+    constructor(posX,imgA,level) {
 
     //propiedades items: azucar, leche, sacarina, aguardiente
 
     this.node = document.createElement("img");
-    this.node.src = "./images/leche.png";    
+    if (imgA === true) {
+    this.node.src = "./images/leche.png";
+    } else {
+    this.node.src = "./images/gotas.png"; 
+    }    
+    this.imgA = imgA
     gameBoxNode.append(this.node)
 
-
+    
     //aqui las propiedades item
     this.x = posX; //posición eje y
     this.y = 0; //posición eje y
     this.w = 60; //ancho
     this.h = 60; //alto
 
-    this.gravitySpeed = 2;
+    this.gravitySpeed = level;
+    
 
     // ajustar el tamaño y posición inicial item
     this.node.style.width = `${this.w}px`;

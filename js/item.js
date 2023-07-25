@@ -1,13 +1,13 @@
 console.log("desde item")
 
 class Item {
-    constructor(posX,isBonus) {
+    constructor(posX,level) {
 
     //propiedades items: azucar, leche, sacarina, aguardiente
 
     this.node = document.createElement("img");
     this.node.src = "./images/azucar.png";  
-    isBonus = isBonus
+    
 
     gameBoxNode.append(this.node)
 
@@ -18,7 +18,7 @@ class Item {
     this.w = 60; //ancho
     this.h = 60; //alto
 
-    this.gravitySpeed = 2;
+    this.gravitySpeed = level;
 
     // ajustar el tamaño y posición inicial item
     this.node.style.width = `${this.w}px`;
@@ -44,11 +44,5 @@ this.node.style.top = `${this.y}px`;
 
   }
 
-imgUpdate = () => {
-  if(isBonus===true) {
-    this.node.src = "./images/azucar.png"
-  } else {
-    this.node.src = "./images/leche.png"
-  }
-}
+
 }
