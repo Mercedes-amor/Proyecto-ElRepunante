@@ -26,6 +26,16 @@ class Game {
     this.gameMusic.volume = 0.2;
     this.gameMusic.loop = true
 
+    this.audioWin =new Audio();
+    this.audioWin.src = "./sounds/victory.mp3";
+    this.audioWin.volume = 0.2;
+    this.audioWin.loop = false
+
+    this.audioGameOver =new Audio();
+    this.audioGameOver.src = "./sounds/gameover.mp3";
+    this.audioGameOver.volume = 0.2;
+    this.audioGameOver.loop = false
+
     this.audioBonus = new Audio("./sounds/bonusSound.mp3")
     this.audioBonus.volume = 0.2;
     this.audioBonus.loop = false;
@@ -39,12 +49,16 @@ musicOn =() => {
 }
 levelComplete =() => {
     this.isGameOn = false; // detiene la recursión del juego
+    this.gameMusic.pause();
+    this.audioWin.play();
     gameScreenNode.style.display ="none"; //oculta pantalla del juego
     gameCompleteScreenNode.style.display = "flex"; //muestra pantalla nivel completado   
     gameOverScreenNode.style.display = "none"; //ocultar pantalla GameOver
 }
 gameOver = () => {
     this.isGameOn = false; // detiene la recursión del juego
+    this.gameMusic.pause();
+    this.audioGameOver.play();
     gameScreenNode.style.display ="none"; //oculta panta del juego
     gameOverScreenNode.style.display = "flex"; //mostrar pantalla final
     gameCompleteScreenNode.style.display = "none"; //oculta pantalla del gameOver
@@ -121,7 +135,7 @@ this.itemsArr.forEach((eachItem,i) => {
 
 
     this.itemsArr[i].node.remove()
-    this.itemsArr.shift() //quitar el elemento del array
+    this.itemsArr.splice(i,1) //quitar el elemento del array
    
 
     if (itemHits === 10) {
@@ -175,7 +189,7 @@ obstaculoColision = () => {
         // console.log(eachObstaculo)
         
         this.obstaculosArr[i].node.remove()
-        this.obstaculosArr.shift() //quitar el elemento del array
+        this.obstaculosArr.splice(i,1) //quitar el elemento del array, intentar hacerlo con .slice(i,1)
     
         if (itemHits < 0) {
             this.gameOver();
@@ -190,8 +204,8 @@ itemsFalls = () => {
     // - cuando hayan pasado x segundos.
     let isBonus= true
     
-    if (this.frames === 60 || this.frames % 240 === 0) {
-        let randomPositionX = Math.floor(Math.random() * 940); 
+    if (this.frames === 60 || this.frames % 247 === 0) {
+        let randomPositionX = Math.floor(Math.random() * 1100); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
 
@@ -212,7 +226,7 @@ obstaculosFalls = () => {
     let newObstaculoB
     
     if (this.frames % 340 === 0) {
-        let randomPositionA = Math.floor(Math.random() * 940); 
+        let randomPositionA = Math.floor(Math.random() * 1100); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
         // if (this.newObstaculoA.x < newObstaculoB.x + newObstaculoB.w &&
@@ -228,8 +242,8 @@ obstaculosFalls = () => {
         // console.log(this.obstaculosArr)
 
    }
-   if (this.frames % 450 === 0) {
-    let randomPositionB = Math.floor(Math.random() * 940); 
+   if (this.frames % 453 === 0) {
+    let randomPositionB = Math.floor(Math.random() * 1100); 
 
     newObstaculoB = new Obstaculo(randomPositionB, false,this.level);
 
@@ -242,13 +256,13 @@ obstaculosFalls = () => {
 itemsDelete= () => {
     //si el primer item del array ha salido de la vista lo eliminamos
 
-    if (this.itemsArr.length !== 0 && this.itemsArr[0].y > 800) {
+    if (this.itemsArr.length !== 0 && this.itemsArr[0].y > 700) {
         this.itemsArr[0].node.remove() // quitar el elemento del DOM (la vista)
         this.itemsArr.shift() //quitar el elemento del array
         // console.log("eliminando elemento")
     }
 
-    if (this.obstaculosArr.length !== 0 && this.obstaculosArr[0].y > 800) {
+    if (this.obstaculosArr.length !== 0 && this.obstaculosArr[0].y > 700) {
         this.obstaculosArr[0].node.remove() // quitar el elemento del DOM (la vista)
         this.obstaculosArr.shift() //quitar el elemento del array
         // console.log("eliminando elemento")

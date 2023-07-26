@@ -34,7 +34,7 @@ body {
 
 #game-box {
   background-color: #dbaf7c;
-  width: 1000px;
+  width: 1200px;
   height: 700px;
 
   background-image: url("../images/fondo.jpg");
@@ -46,9 +46,17 @@ body {
   position: relative; /* this will allow elements to be positioned relative to the game-box */
   user-select: none; /* this will prevent elements from being highlighted */
 }
+#tituloGameBox {
+  width: 1200px;
+  height: 100px;
+  background-color: #221608;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  
 
+}
 #score-box {
-  width: 1000px;
+  width: 1200px;
   height: 100px;
   background-color: #221608;
   border: 2px solid rgb(0, 0, 0);

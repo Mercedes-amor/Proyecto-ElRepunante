@@ -93,9 +93,21 @@ window.addEventListener("keydown", () => {
           });
 
     }
+    if (event.key === "ArrowUp" && gameObj.cafe.y === 570) {
+        gameObj.cafe.y -= 120;
+        gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
 
+        const audio =new Audio();
+        audio.src = "./sounds/slimejump-6913.mp3";
+        audio.volume = 0.4;
+        
+        audio.play().then(() => {
+            return true;
+          });
 
-    if (event.key === "ArrowRight" && gameObj.cafe.x < 880 ) {
+    }
+
+    if (event.key === "ArrowRight" && gameObj.cafe.x < 1070 ) {
         gameObj.cafe.x += 40;
         gameObj.cafe.cafeNode.src = "./images/cafeDrch.png";
     }
