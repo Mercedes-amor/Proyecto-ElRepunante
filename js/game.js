@@ -18,10 +18,25 @@ class Game {
     this.isGameOn = true;
     this.level = level
 
+    //Audio
+    this.isMusicOn = true
+
+    this.gameMusic =new Audio();
+    this.gameMusic.src = "./sounds/bso.mp3";
+    this.gameMusic.volume = 0.2;
+    this.gameMusic.loop = true
+
+    this.audioBonus = new Audio("./sounds/bonusSound.mp3")
+    this.audioBonus.volume = 0.2;
+    this.audioBonus.loop = false;
     }
 
 //Métodos juego
-
+musicOn =() => {
+    if(this.isGameOn === true) {
+    this.gameMusic.play();
+    }
+}
 levelComplete =() => {
     this.isGameOn = false; // detiene la recursión del juego
     gameScreenNode.style.display ="none"; //oculta pantalla del juego
@@ -100,7 +115,11 @@ this.itemsArr.forEach((eachItem,i) => {
     // console.log("Has cogido un azucarillo!")  
     // console.log(eachItem)
   
+    //Reproducir sonido
+    this.audioBonus.play();
     
+
+
     this.itemsArr[i].node.remove()
     this.itemsArr.shift() //quitar el elemento del array
    
@@ -151,8 +170,7 @@ obstaculoColision = () => {
         //Has cogido el erróneo!
         itemHits--
         let porcentaje = itemHits*10
-        // console.log(`estos son los itemHits azucar, ${itemHits}`)
-
+        
         barraProgreso.innerText = `${porcentaje}%`
         // console.log(eachObstaculo)
         
@@ -172,7 +190,7 @@ itemsFalls = () => {
     // - cuando hayan pasado x segundos.
     let isBonus= true
     
-    if (this.frames % 240 === 0) {
+    if (this.frames === 60 || this.frames % 240 === 0) {
         let randomPositionX = Math.floor(Math.random() * 940); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
@@ -193,9 +211,8 @@ obstaculosFalls = () => {
     let newObstaculoA
     let newObstaculoB
     
-    if (this.frames % 400 === 0) {
+    if (this.frames % 340 === 0) {
         let randomPositionA = Math.floor(Math.random() * 940); 
-        let randomPositionB = Math.floor(Math.random() * 940); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
         
         // if (this.newObstaculoA.x < newObstaculoB.x + newObstaculoB.w &&
@@ -206,25 +223,32 @@ obstaculosFalls = () => {
 
         newObstaculoA = new Obstaculo(randomPositionA, true,this.level);
         this.obstaculosArr.push (newObstaculoA)
-    
-        newObstaculoB = new Obstaculo(randomPositionB, false,this.level);
-        this.obstaculosArr.push (newObstaculoB)
 
         // console.log(this.obstaculosArr[0].y)
         // console.log(this.obstaculosArr)
+
+   }
+   if (this.frames % 450 === 0) {
+    let randomPositionB = Math.floor(Math.random() * 940); 
+
+    newObstaculoB = new Obstaculo(randomPositionB, false,this.level);
+
+
+    
+    this.obstaculosArr.push (newObstaculoB)
    }
 }
 
 itemsDelete= () => {
     //si el primer item del array ha salido de la vista lo eliminamos
 
-    if (this.itemsArr.length !== 0 && this.itemsArr[0].y > 700) {
+    if (this.itemsArr.length !== 0 && this.itemsArr[0].y > 800) {
         this.itemsArr[0].node.remove() // quitar el elemento del DOM (la vista)
         this.itemsArr.shift() //quitar el elemento del array
         // console.log("eliminando elemento")
     }
 
-    if (this.obstaculosArr.length !== 0 && this.obstaculosArr[0].y > 700) {
+    if (this.obstaculosArr.length !== 0 && this.obstaculosArr[0].y > 800) {
         this.obstaculosArr[0].node.remove() // quitar el elemento del DOM (la vista)
         this.obstaculosArr.shift() //quitar el elemento del array
         // console.log("eliminando elemento")
@@ -241,6 +265,7 @@ gameLoop = () => {
     this.cogerItem();
     this.subirScore();
 
+    this.musicOn();
 
     this.itemsFalls();
     this.obstaculosFalls();

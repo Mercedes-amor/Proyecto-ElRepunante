@@ -12,8 +12,15 @@ const gameCompleteScreenNode = document.querySelector("#gamecomplete-screen")
 const scoreNode = document.querySelector("#score");
 const itemBonusNode = document.querySelector("#itemBonus");
 
+//Score
 const barraProgreso = document.querySelector("#barraProgreso");
 const cantidadProgreso = document.querySelector("#cantidad-progreso");
+
+//Sonido addEventListener
+// const gameMusic =new Audio();
+// gameMusic.src = "./sounds/bso.mp3";
+// gameMusic.volume = 0.3;
+// gameMusic.loop = false
 
 
 
@@ -25,7 +32,11 @@ let level = 2
 
 // * STATE MANAGEMENT FUNCTIONS
 
+
 function startGame() {
+    //Música
+    // gameMusic.play();
+
 
     console.log("iniciando el juego")
     splashScreenNode.style.display = "none";
@@ -69,10 +80,20 @@ window.addEventListener("keydown", () => {
     // console.log("presionando una tecla",event.key);
 
    
-    if (event.key === " " && gameObj.cafe.y > 0) {
-        gameObj.cafe.y -= 100;
+    if (event.key === " " && gameObj.cafe.y === 570) {
+        gameObj.cafe.y -= 120;
         gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
+
+        const audio =new Audio();
+        audio.src = "./sounds/slimejump-6913.mp3";
+        audio.volume = 0.4;
+        
+        audio.play().then(() => {
+            return true;
+          });
+
     }
+
 
     if (event.key === "ArrowRight" && gameObj.cafe.x < 880 ) {
         gameObj.cafe.x += 40;
