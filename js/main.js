@@ -79,7 +79,9 @@ function startGame() {
     gameObj = new Game(level);
     gameObj.itemsArr = [];
     gameObj.gameLoop();
-     
+    
+    audioOn();
+
     gameObj.frames = 0;
         }
 
@@ -89,7 +91,7 @@ startBtnNode.addEventListener("click",startGame)
 
 nextLevelBtnNode.addEventListener("click",nextLevel)
 
-restartBtnNode.addEventListener("click",nextLevel)
+restartBtnNode.addEventListener("click",startGame)
 
 audioOnBtn.addEventListener("click", audioOn)
 
