@@ -15,8 +15,8 @@ class Item {
     //aqui las propiedades item
     this.x = posX; //posición eje y
     this.y = 0; //posición eje y
-    this.w = 60; //ancho
-    this.h = 60; //alto
+    this.w = 70; //ancho
+    this.h = 70; //alto
 
     this.gravitySpeed = level;
 

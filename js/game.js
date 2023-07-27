@@ -23,22 +23,27 @@ class Game {
 
     this.gameMusic =new Audio();
     this.gameMusic.src = "./sounds/bso.mp3";
-    this.gameMusic.volume = 0.2;
+    this.gameMusic.volume = 0.1;
     this.gameMusic.loop = true
 
     this.audioWin =new Audio();
     this.audioWin.src = "./sounds/victory.mp3";
-    this.audioWin.volume = 0.2;
+    this.audioWin.volume = 0.1;
     this.audioWin.loop = false
 
     this.audioGameOver =new Audio();
     this.audioGameOver.src = "./sounds/gameover.mp3";
-    this.audioGameOver.volume = 0.2;
+    this.audioGameOver.volume = 0.1;
     this.audioGameOver.loop = false
 
     this.audioBonus = new Audio("./sounds/bonusSound.mp3")
-    this.audioBonus.volume = 0.2;
+    this.audioBonus.volume = 0.1;
     this.audioBonus.loop = false;
+
+    this.audioFail = new Audio("./sounds/fail.mp3")
+    this.audioFail.volume = 0.1;
+    this.audioFail.loop = false
+
     }
 
 //Métodos juego
@@ -190,7 +195,10 @@ obstaculoColision = () => {
         
         this.obstaculosArr[i].node.remove()
         this.obstaculosArr.splice(i,1) //quitar el elemento del array, intentar hacerlo con .slice(i,1)
-    
+        
+        //Reproducir sonido
+        this.audioFail.play();
+        
         if (itemHits < 0) {
             this.gameOver();
         }
@@ -202,8 +210,7 @@ itemsFalls = () => {
     //cuando queremos que aparezcan items
     // - Al inicio del juego
     // - cuando hayan pasado x segundos.
-    let isBonus= true
-    
+        
     if (this.frames === 60 || this.frames % 247 === 0) {
         let randomPositionX = Math.floor(Math.random() * 1100); 
         //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
@@ -215,7 +222,7 @@ itemsFalls = () => {
         // console.log(this.itemsArr)
     }
    
-    
+     
 }
 
 obstaculosFalls = () => {

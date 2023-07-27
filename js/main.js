@@ -16,13 +16,6 @@ const itemBonusNode = document.querySelector("#itemBonus");
 const barraProgreso = document.querySelector("#barraProgreso");
 const cantidadProgreso = document.querySelector("#cantidad-progreso");
 
-//Sonido addEventListener
-// const gameMusic =new Audio();
-// gameMusic.src = "./sounds/bso.mp3";
-// gameMusic.volume = 0.3;
-// gameMusic.loop = false
-
-
 
 let gameObj = null; //juego aún no ha iniciado
 let itemHits = 0;
@@ -36,8 +29,7 @@ let level = 2
 function startGame() {
     //Música
     // gameMusic.play();
-
-
+    
     console.log("iniciando el juego")
     splashScreenNode.style.display = "none";
     gameOverScreenNode.style.display = "none";
@@ -85,8 +77,8 @@ window.addEventListener("keydown", () => {
         gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
 
         const audio =new Audio();
-        audio.src = "./sounds/slimejump-6913.mp3";
-        audio.volume = 0.4;
+        audio.src = "./sounds/jump.wav";
+        audio.volume = 0.3;
         
         audio.play().then(() => {
             return true;
@@ -98,8 +90,8 @@ window.addEventListener("keydown", () => {
         gameObj.cafe.cafeNode.src = "./images/cafeSalto.png";
 
         const audio =new Audio();
-        audio.src = "./sounds/slimejump-6913.mp3";
-        audio.volume = 0.4;
+        audio.src = "./sounds/jump.wav";
+        audio.volume = 0.3;
         
         audio.play().then(() => {
             return true;
