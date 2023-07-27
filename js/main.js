@@ -4,6 +4,9 @@
 const startBtnNode = document.querySelector("#start-btn");
 const restartBtnNode = document.querySelector("#restart-btn");
 const nextLevelBtnNode = document.querySelector("#nextLevel-btn");
+const audioOnBtn = document.querySelector("#audioOn");
+const audioOffBtn = document.querySelector("#audioOff");
+
 const splashScreenNode = document.querySelector("#splash-screen");
 const gameScreenNode = document.querySelector("#game-screen");
 const gameBoxNode = document.querySelector("#game-box");
@@ -25,10 +28,19 @@ let level = 2
 
 // * STATE MANAGEMENT FUNCTIONS
 
+//Audio
+
+audioOn = () => {
+    gameObj.gameMusic.play();
+    gameObj.isMusicOn = true;
+  };
+  
+audioOff = () => {
+    gameObj.gameMusic.pause();
+    gameObj.isMusicOn = false;
+  };
 
 function startGame() {
-    //Música
-    // gameMusic.play();
     
     console.log("iniciando el juego")
     splashScreenNode.style.display = "none";
@@ -39,25 +51,37 @@ function startGame() {
     itemHits = 0
     barraProgreso.innerText = "0%"
     gameBoxNode.innerHTML = "";
+ 
+    gameObj = new Game(level);
+    gameObj.itemsArr = [];
+    gameObj.gameLoop();
     
-    gameObj = new Game(2);
-    gameObj.gameLoop()
+    audioOn();
+    
+    gameObj.frames = 0;
     }
 
-function nextLevel() {
-    console.log("siguiente nivel")
-    gameCompleteScreenNode.style.display = "none";
+    function nextLevel() {
+
+    level = level+2
+    
+    console.log("iniciando el juego")
+    splashScreenNode.style.display = "none";
+    gameOverScreenNode.style.display = "none";
+    gameCompleteScreenNode.style.display ="none";
     gameScreenNode.style.display = "flex";
+        
     itemHits = 0
     barraProgreso.innerText = "0%"
-        
     gameBoxNode.innerHTML = "";
-
-    gameObj = new Game(level+=2);
-    gameObj.gameLoop()
-
     
-    }
+
+    gameObj = new Game(level);
+    gameObj.itemsArr = [];
+    gameObj.gameLoop();
+     
+    gameObj.frames = 0;
+        }
 
 // * ADD EVENT LISTENERS
 
@@ -65,7 +89,12 @@ startBtnNode.addEventListener("click",startGame)
 
 nextLevelBtnNode.addEventListener("click",nextLevel)
 
-restartBtnNode.addEventListener("click",startGame)
+restartBtnNode.addEventListener("click",nextLevel)
+
+audioOnBtn.addEventListener("click", audioOn)
+
+audioOffBtn.addEventListener("click", audioOff)
+
 
 window.addEventListener("keydown", () => {
 
@@ -99,13 +128,13 @@ window.addEventListener("keydown", () => {
 
     }
 
-    if (event.key === "ArrowRight" && gameObj.cafe.x < 1070 ) {
-        gameObj.cafe.x += 40;
+    if (event.key === "ArrowRight" && gameObj.cafe.x < 1061 ) {
+        gameObj.cafe.x += 60;
         gameObj.cafe.cafeNode.src = "./images/cafeDrch.png";
     }
 
     if (event.key === "ArrowLeft" && gameObj.cafe.x > 0) {
-        gameObj.cafe.x -= 40;
+        gameObj.cafe.x -= 60;
         gameObj.cafe.cafeNode.src = "./images/cafeIzq.png";
     }
  
@@ -153,10 +182,11 @@ window.addEventListener("keydown", () => {
 // -Cambiar imagen café drch/izq CHECK
 // -Reinicio juego CHECK
 // -Café no salga de los márgenes CHECK
+// -Sonido- CHECK
+// -¡¡Solucionar problema congelación items!! conseguido con .slice() CHECK
 
 //PENDIENTES:
 // -movimiento fluido café
-// -Sonido
 // -Conseguir volver a imagen inicial cafe
 // -¡¡objetos no se superpongan!! Mirar con comprobación colisiones
-// -¡¡Solucionar problema congelación items!! Mirar usar booleanos
+//-¡¡FUNCIÓN PERDER ITEMS EN TODOS LOS NIVELES!!

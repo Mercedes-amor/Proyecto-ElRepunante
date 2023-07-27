@@ -16,14 +16,14 @@ class Game {
     
     this.frames = 0   
     this.isGameOn = true;
-    this.level = level
+    this.actualLevel = level
 
     //Audio
     this.isMusicOn = true
 
     this.gameMusic =new Audio();
-    this.gameMusic.src = "./sounds/bso.mp3";
-    this.gameMusic.volume = 0.1;
+    this.gameMusic.src = "./sounds/bso2.mp3";
+    this.gameMusic.volume = 0.05;
     this.gameMusic.loop = true
 
     this.audioWin =new Audio();
@@ -50,6 +50,12 @@ class Game {
 musicOn =() => {
     if(this.isGameOn === true) {
     this.gameMusic.play();
+    }
+}
+
+musicOff =() => {
+    if(this.isGameOn === true) {
+    this.gameMusic.pause();
     }
 }
 levelComplete =() => {
@@ -135,21 +141,44 @@ this.itemsArr.forEach((eachItem,i) => {
     // console.log(eachItem)
   
     //Reproducir sonido
-    this.audioBonus.play();
-    
+    this.audioBonus.play();  
 
-
-    this.itemsArr[i].node.remove()
+    eachItem.node.remove()
     this.itemsArr.splice(i,1) //quitar el elemento del array
    
-
+        
     if (itemHits === 10) {
         this.levelComplete();
     }}
+    
 })
 
 } 
 
+perderItem = () => {
+    //Si no coges un Item resta puntos
+
+    this.itemsArr.forEach((eachItem,i) => {
+
+        if (eachItem.y > 690) {
+            itemHits--
+            let porcentaje = itemHits*10
+            barraProgreso.innerText = `${porcentaje}%`;
+    
+            eachItem.node.remove()
+            this.itemsArr.splice(i,1) //quitar el elemento del array
+    
+            this.audioFail.play();
+            console.log(itemHits,this.itemsArr)
+        
+            if (itemHits < 0) {
+                this.gameOver();
+            }
+        }
+
+    })
+
+}
 obstaculoColision = () => {
     //Si el café choca con un obstaculo baja puntuación
     
@@ -213,13 +242,26 @@ itemsFalls = () => {
         
     if (this.frames === 60 || this.frames % 247 === 0) {
         let randomPositionX = Math.floor(Math.random() * 1100); 
-        //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
+        //nos devuelve un número aleatorio entre 0 y 1100 (para respetar ancho gameBox)
         
+        let newItem = new Item(randomPositionX,this.actualLevel);
 
-        let newItem = new Item(randomPositionX,this.level);
+        
+        //Bloqueo colisiones
+        // this.obstaculosArr.forEach((eachObstaculo) => {
+        //     if (
+        //         this.newItem.x < eachObstaculo.x + eachObstaculo.w &&
+        //         this.newItem.x + this.newItem.w > eachObstaculo.x &&
+        //         this.newItem.y < eachObstaculo.y + eachObstaculo.h &&
+        //         this.newItem.y + this.eachObstaculo.h > eachObstaculo.y
+        //       ) {
+        //         console.log("Hay colisión")}
+        // })
+        
+        
         this.itemsArr.push (newItem)
         // console.log(this.itemsArr[0].y)
-        // console.log(this.itemsArr)
+        console.log(this.itemsArr)
     }
    
      
@@ -234,7 +276,9 @@ obstaculosFalls = () => {
     
     if (this.frames % 340 === 0) {
         let randomPositionA = Math.floor(Math.random() * 1100); 
-        //nos devuelve un número aleatorio entre 0 y 940 (para respetar ancho gameBox)
+        //nos devuelve un número aleatorio entre 0 y 1100 (ancho gameBox con márgenes)
+        
+        newObstaculoA = new Obstaculo(randomPositionA, true,this.actualLevel);
         
         // if (this.newObstaculoA.x < newObstaculoB.x + newObstaculoB.w &&
         //     this.newObstaculoA.x + this.newObstaculoB.w > newObstaculoB.x &&
@@ -242,7 +286,7 @@ obstaculosFalls = () => {
         //     this.newObstaculoA.y + this.newObstaculoB.h > newObstaculoB.y) {
         //  }        
 
-        newObstaculoA = new Obstaculo(randomPositionA, true,this.level);
+        
         this.obstaculosArr.push (newObstaculoA)
 
         // console.log(this.obstaculosArr[0].y)
@@ -252,12 +296,20 @@ obstaculosFalls = () => {
    if (this.frames % 453 === 0) {
     let randomPositionB = Math.floor(Math.random() * 1100); 
 
-    newObstaculoB = new Obstaculo(randomPositionB, false,this.level);
+    newObstaculoB = new Obstaculo(randomPositionB, false,this.actualLevel);
+        
+        // if (this.newObstaculoA.x < newObstaculoB.x + newObstaculoB.w &&
+        //     this.newObstaculoA.x + this.newObstaculoB.w > newObstaculoB.x &&
+        //     this.newObstaculoA.y < newObstaculoB.y + newObstaculoB.h &&
+        //     this.newObstaculoA.y + this.newObstaculoB.h > newObstaculoB.y) {
+        //  }        
 
 
     
     this.obstaculosArr.push (newObstaculoB)
    }
+
+   
 }
 
 itemsDelete= () => {
@@ -280,18 +332,17 @@ itemsDelete= () => {
 gameLoop = () => {
     
     this.frames++;
-    // console.log(this.frames)
+    // console.log("frames", this.frames)
 
     this.changeItemIcon();
     this.cogerItem();
+    
     this.subirScore();
-
-    this.musicOn();
 
     this.itemsFalls();
     this.obstaculosFalls();
     this.itemsDelete();
-
+    this.perderItem();
 
     this.obstaculoColision();
 
