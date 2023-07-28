@@ -41,6 +41,7 @@ audioOff = () => {
   };
 
 function startGame() {
+    level=2
     
     console.log("iniciando el juego")
     splashScreenNode.style.display = "none";
